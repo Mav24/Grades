@@ -12,11 +12,13 @@
 
                 names = inFile.ReadLine
 
+                ' Store each line from file to an array
                 arr(i) = names
 
                 ' Split and only put first word in the list box
                 lstStudentNames.Items.Add(arr(i).Split(",")(0))
 
+                ' increment
                 i += 1
 
             Loop
