@@ -1,27 +1,21 @@
 ﻿Public Class MainForm
-    Dim inFile As IO.StreamReader
-    Dim arr(5) As String
+
+    ' Globle array
+    Dim arr() As String
     Private Sub MainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        Dim i As Integer = 0
-        Dim names As String
+
 
         If IO.File.Exists("Students.txt") Then
-            inFile = IO.File.OpenText("Students.txt")
-            Do Until inFile.Peek = -1
 
-                names = inFile.ReadLine
+            arr = IO.File.ReadAllLines("Students.txt")
 
-                ' Store each line from file to an array
-                arr(i) = names
+            For index = 0 To arr.Length - 1
+                lstStudentNames.Items.Add(arr(index).Split(",")(0))
+            Next index
 
-                ' Split and only put first word in the list box
-                lstStudentNames.Items.Add(arr(i).Split(",")(0))
-
-                ' increment
-                i += 1
-
-            Loop
+        Else
+            MessageBox.Show("Sorry File was not found!", "File doesn't exist", MessageBoxButtons.OK)
         End If
     End Sub
 
